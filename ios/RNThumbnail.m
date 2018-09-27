@@ -34,9 +34,9 @@ RCT_EXPORT_METHOD(get:(NSString *)filepath resolve:(RCTPromiseResolveBlock)resol
                                                                        NSUserDomainMask,
                                                                        YES) lastObject];
         
-        NSData *data = UIImageJPEGRepresentation(thumbnail, 1.0);
+        NSData *data = UIImagePNGRepresentation(thumbnail, 1.0);
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *fullPath = [tempDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"thumb-%@.jpg", [[NSProcessInfo processInfo] globallyUniqueString]]];
+        NSString *fullPath = [tempDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"thumb-%@.png", [[NSProcessInfo processInfo] globallyUniqueString]]];
         [fileManager createFileAtPath:fullPath contents:data attributes:nil];
         if (resolve)
             resolve(@{ @"path" : fullPath,

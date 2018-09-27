@@ -42,7 +42,7 @@ public class RNThumbnailModule extends ReactContextBaseJavaModule {
     filePath = filePath.replace("file://","");
     MediaMetadataRetriever retriever = new MediaMetadataRetriever();
     retriever.setDataSource(filePath);
-    Bitmap image = retriever.getFrameAtTime(1000000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+    Bitmap image = retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
 
     String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/thumb";
 
@@ -54,13 +54,13 @@ public class RNThumbnailModule extends ReactContextBaseJavaModule {
 
       OutputStream fOut = null;
       // String fileName = "thumb-" + UUID.randomUUID().toString() + ".jpeg";
-      String fileName = "thumb-" + UUID.randomUUID().toString() + ".jpeg";
+      String fileName = "thumb-" + UUID.randomUUID().toString() + ".png";
       File file = new File(fullPath, fileName);
       file.createNewFile();
       fOut = new FileOutputStream(file);
 
       // 100 means no compression, the lower you go, the stronger the compression
-      image.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+      image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
       fOut.flush();
       fOut.close();
 
